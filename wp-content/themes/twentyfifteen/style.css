@@ -6008,5 +6008,5 @@ p > video {
 
 /* CUSTOM STYLES */
 
-.comment-reply-title{display: none !important;}
+.comment-reply-title, .entry-footer .comments-link{display: none !important;}
 ..site-title{font-size:font-size: 3.7rem !important;}

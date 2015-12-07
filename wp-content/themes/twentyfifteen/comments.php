@@ -104,8 +104,8 @@
 
 						echo "</br></br>Previous owner of the item: "; the_author_meta('user_email');
 
-						//$to2 = "'".the_author_meta(user_email)."'";
-						wp_mail( 'sa.priom@gmail.com', 'Montreal Auction', 'You have won an auction.' );
+						$to = '<?php the_author_meta(user_email); ?>';
+						wp_mail( $to, 'Montreal Auction', 'You have won an auction.' );
 						//wp_mail( $to, 'Montreal Auction', 'You have a winner for your auction' );*/
 					
 					}
@@ -151,9 +151,14 @@
 					$stackBidValue = array();
 					$stackBidID = array();
 					foreach ( $comments4 as $comment ){
-						array_push($stackBidValue, $comment->comment_content);
-						array_push($stackBidID, $comment->comment_ID);					
+						if (!in_array($comment->comment_content, $stackBidValue)){
+							array_push($stackBidValue, $comment->comment_content);
+							array_push($stackBidID, $comment->comment_ID);
+						}					
 					}
+
+					print_r($stackBidValue);
+					print_r($stackBidID);
 
 					// Highest bid in last minutes
 					$highestBidIndex = array_search(max($stackBidValue), $stackBidValue);
